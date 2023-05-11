@@ -19,12 +19,17 @@ public class BookRepository implements IBook<Book> {
 
     @Override
     public Collection<Book> viewAllBook() {
-       return repository.values();
+        return repository.values();
     }
-    
+
     @Override
     public void deleteBook(int id) {
-       repository.remove(id);
+        repository.remove(id);
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        repository.put(book.getId(), book);
     }
 
 }

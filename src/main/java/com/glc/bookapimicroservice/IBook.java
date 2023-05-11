@@ -8,4 +8,7 @@ public interface IBook<T> {
     public Collection<Book> viewAllBook();
 
     public void deleteBook(int id);
+
+    public void updateBook(T t);
+
 }

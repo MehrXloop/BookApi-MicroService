@@ -45,8 +45,9 @@ class BookApiMicroServiceApplicationTests {
 		mvc = MockMvcBuilders.standaloneSetup(bookController).build();
 	}
 
-	// AC1: When I enter the title, author, year of publication, and length of the
-	// book into the UI and hit submit, my book will saved to the list.
+	// AC1: When I enter the title, author, year of publication, and
+	// length of the book into the UI and hit submit, my book will
+	// saved to the list.
 	@Test
 	public void canCreateANewBook() throws Exception {
 		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
@@ -57,6 +58,9 @@ class BookApiMicroServiceApplicationTests {
 				.andExpect(status().isOk());
 
 	}
+
+	// AC2: When I click “View All Books” the application will display a
+	// list of all the books in my list.
 
 	@Test
 	public void canViewAllBooks() throws Exception {
@@ -74,19 +78,20 @@ class BookApiMicroServiceApplicationTests {
 
 	}
 
-// 	AC3: When I click the checkbox next to a book, and then the 
-// press the “Delete Book” button, the application will remove the 
-// book from my list.
-    
+	// AC3: When I click the checkbox next to a book, and then the
+	// press the “Delete Book” button, the application will remove the
+	// book from my list.
+
 	@Test
-	public void canDeleteBook() throws Exception{
+	public void canDeleteBook() throws Exception {
 		mvc.perform(delete("/books/1"))
-		.andExpect(status().isOk());
+				.andExpect(status().isOk());
 	}
 
-	
-	//AC:4  When I click the checkbox next to a book, and then press the “Update Book” button, the application will allow me to update any of the information about the book.
-    
+	// AC4: When I click the checkbox next to a book, and then press
+	// the “Update Book” button, the application will allow me to
+	// update any of the information about the book.
+
 	@Test
 	public void canUpdateBook() throws Exception {
 		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
