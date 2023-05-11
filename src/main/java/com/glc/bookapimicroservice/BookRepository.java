@@ -21,5 +21,10 @@ public class BookRepository implements IBook<Book> {
     public Collection<Book> viewAllBook() {
        return repository.values();
     }
+    
+    @Override
+    public void deleteBook(int id) {
+       repository.remove(id);
+    }
 
 }
