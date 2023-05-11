@@ -66,6 +66,7 @@ class BookApiMicroServiceApplicationTests {
 		List<Book> bookList = new ArrayList<>();
 		bookList.add(book1);
 		bookList.add(book2);
+		when(bookRepository.viewAllBook()).thenReturn(bookList);
 		mvc.perform(get("/books")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
