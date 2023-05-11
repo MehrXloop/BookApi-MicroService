@@ -84,4 +84,16 @@ class BookApiMicroServiceApplicationTests {
 		.andExpect(status().isOk());
 	}
 
+	
+	//AC:4  When I click the checkbox next to a book, and then press the “Update Book” button, the application will allow me to update any of the information about the book.
+    
+	@Test
+	public void canUpdateBook() throws Exception {
+		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+		mvc.perform(put("/books")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonBook.write(book).getJson()))
+				.andExpect(status().isOk());
+	}
+
 }
