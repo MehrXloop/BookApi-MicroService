@@ -10,9 +10,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import java.util.Collection;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @AutoConfigureJsonTesters
 @SpringBootTest
@@ -30,16 +36,22 @@ class BookApiMicroServiceApplicationTests {
 
 	private JacksonTester<Collection<Book>> jsonBooks;
 
-	// AC1: When I enter the title, author, year of publication, and length of the
-	// book into the UI and hit submit, my book will saved to the list.
+	@BeforeEach
+	public void setUp() {
+		JacksonTester.initFields(this, new ObjectMapper());
+		mvc = MockMvcBuilders.standaloneSetup(bookController).build();
+	}
+
+	// AC1: When I enter the title, author, year of publication, and length of the book into the UI and hit submit, my book will saved to the list.
 	@Test
-	public void canAddBook() throws Exception {
-		Book book = new Book(1, "Rich Dad Poor Dad", "Robert", 1999, 240);
+	public void canCreateANewBook() throws Exception {
+		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+
 		mvc.perform(post("/books")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonBook.write(book).getJson()))
 				.andExpect(status().isOk());
+
 	}
 
-	
 }
