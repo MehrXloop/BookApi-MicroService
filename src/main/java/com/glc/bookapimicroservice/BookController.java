@@ -17,8 +17,8 @@ public class BookController {
 
     private BookRepository repo;
 
-    public BookController() {
-        repo = new BookRepository();
+    public BookController(BookRepository repo) {
+        this.repo = repo;
     }
 
     // saveBook
