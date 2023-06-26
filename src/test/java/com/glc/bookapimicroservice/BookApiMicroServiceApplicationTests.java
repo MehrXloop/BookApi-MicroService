@@ -51,7 +51,7 @@ class BookApiMicroServiceApplicationTests {
 	@Test
 	public void canCreateANewBook() throws Exception {
 		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
-
+    //    when(bookRepository.save(book)).thenReturn((book));
 		mvc.perform(post("/books")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonBook.write(book).getJson()))
@@ -66,7 +66,7 @@ class BookApiMicroServiceApplicationTests {
 	public void canViewAllBooks() throws Exception {
 		Book book1 = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
 		Book book2 = new Book(2, "The Catcher in the Rye", "J.D. Salinger", 1937, 320);
-
+       
 		List<Book> bookList = new ArrayList<>();
 		bookList.add(book1);
 		bookList.add(book2);
@@ -84,6 +84,8 @@ class BookApiMicroServiceApplicationTests {
 
 	@Test
 	public void canDeleteBook() throws Exception {
+		// Long bookId = 1l;
+		// doNothing().when(bookRepository).deleteById(bookId);
 		mvc.perform(delete("/books/1"))
 				.andExpect(status().isOk());
 	}
@@ -94,7 +96,10 @@ class BookApiMicroServiceApplicationTests {
 
 	@Test
 	public void canUpdateBook() throws Exception {
-		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+		Book updatebook = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+
+		// when(bookRepository.findById(1L)).thenReturn(Optional.of(updatebook));
+		// when(bookRepository.save(updatebook)).thenReturn((updatebook));
 		mvc.perform(put("/books")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonBook.write(book).getJson()))
